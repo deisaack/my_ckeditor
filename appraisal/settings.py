@@ -29,6 +29,7 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'ckeditor_uploader',
+    'django_mathjax',
 ]
 
 MIDDLEWARE = [
@@ -83,7 +84,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'live/static')
@@ -91,13 +92,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'live/media')
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = 'pillow'
 
+
 # CKEDITOR_RESTRICT_BY_USER = True
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
+MATHJAX_ENABLED=True
+MATHJAX_LOCAL_PATH = 'js/libs/mathjax/'
+
 
 CKEDITOR_CONFIGS = {
     'default': {
-        'skin': 'moono',
-        # 'skin': 'office2013',
+        'skin': 'office2013',
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
@@ -121,13 +125,13 @@ CKEDITOR_CONFIGS = {
             '/',
             {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
-            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
-            {'name': 'about', 'items': ['About']},
+            {'name': 'tools', 'items': ['Maximize', 'ShowBlocks', 'Math']},
+            # {'name': 'about', 'items': ['About']},
             '/',  # put this to force next toolbar on new line
             {'name': 'yourcustomtools', 'items': [
                 # put the name of your editor.ui.addButton here
-                'Preview',
-                'Maximize',
+                'Preview', 'Youtube',
+                'Maximize', 'CodeSnippet', 'Math',
 
             ]},
         ],
@@ -139,22 +143,68 @@ CKEDITOR_CONFIGS = {
         # 'filebrowserWindowWidth': 940,
         # 'toolbarCanCollapse': True,
         # 'mathJaxLib': '//cdn.mathjax.org/mathjax/2.2-latest/MathJax.js?config=TeX-AMS_HTML',
+        'codeSnippet_theme': 'xcode',
+        # 'mathJaxClass': 'my-math',
+        'mathJaxLib' : '/static/js/libs/MathJax.js',
         'tabSpaces': 4,
+        'youtube_responsive' : True,
+        'scayt_autoStartup' : True,
+        'imageResize' : [{
+            'maxWidth' : 400,
+            'maxHeight' : 300,
+        }],
+
+
         'extraPlugins': ','.join([
             'uploadimage', # the upload image feature
             # your extra plugins here
+            'mathjax',
+            # 'embed',
+            # 'embedbase',
+            'codesnippet',
+            'imageresize',
+            'panel',
+            'uploadfile',
+            'uploadwidget',
+            'toolbar',
+            'notificationaggregator',
+            'notification',
+            'button',
+            'filetools',
+            'clipboard',
+            'widget',
+            'widgetselection',
+            'selectall',
+            'lineutils',
+            'link',
+            'fakeobjects',
+            'autogrow',
+            'tableresize',
+            'tabletools',
+            'table',
+            'colordialog',
+            'dialogadvtab',
+            'contextmenu',
+            'menu',
+            'floatpanel',
+
             'div',
             'autolink',
             'autoembed',
             'embedsemantic',
             'autogrow',
+            'smiley',
+            'font',
+            'youtube',
             # 'devtools',
             'widget',
             'lineutils',
             'clipboard',
             'dialog',
             'dialogui',
-            'elementspath'
+            'elementspath',
+
         ]),
     }
 }
+
